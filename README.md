@@ -1,116 +1,125 @@
-# SaaS Boilerplate 🚀
+<div align="center">
+  <img src="https://img.shields.io/badge/Next.js-16-black?style=for-the-badge&logo=next.js" alt="Next.js" />
+  <img src="https://img.shields.io/badge/React-19-blue?style=for-the-badge&logo=react" alt="React" />
+  <img src="https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript" />
+  <img src="https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white" alt="Tailwind CSS" />
+  <img src="https://img.shields.io/badge/Supabase-3ECF8E?style=for-the-badge&logo=supabase&logoColor=white" alt="Supabase" />
+  <br />
+  <img src="https://img.shields.io/badge/Vitest-729B1B?style=for-the-badge&logo=vitest&logoColor=white" alt="Vitest" />
+  <img src="https://img.shields.io/badge/Stripe-626CD9?style=for-the-badge&logo=stripe&logoColor=white" alt="Stripe" />
+  <img src="https://img.shields.io/badge/Zustand-4D4D4D?style=for-the-badge" alt="Zustand" />
+  <img src="https://img.shields.io/badge/i18next-26A69A?style=for-the-badge&logo=i18next&logoColor=white" alt="i18next" />
+</div>
 
-An ultimate, production-ready SaaS Boilerplate built with Next.js 16 (App Router), focusing on the **SOLID principles**, scalability, and a premium developer experience.
+<br />
 
-Abstract away the tedious setup of authentication, payments, internationalization, and databases so you can focus on building your product.
+<h1 align="center">SaaS Boilerplate 🚀</h1>
+
+<p align="center">
+  O boilerplate definitivo para SaaS, pronto para produção, construído com Next.js 16 (App Router), focado nos <strong>princípios SOLID</strong>, escalabilidade e em uma experiência de desenvolvimento premium.
+</p>
+
+<p align="center">
+  <em><a href="README.en.md">🇺🇸 Read this in English</a></em>
+</p>
 
 ---
 
-## 🏗️ Architecture & Tech Stack
+Abstraia a configuração tediosa de autenticação, pagamentos, internacionalização e bancos de dados para que você possa focar no que importa: **construir o seu produto**.
 
-This boilerplate is powered by industry-standard tools carefully integrated to work seamlessly together:
+## 🏗️ Arquitetura e Stack Tecnológica
+
+Este boilerplate é alimentado por ferramentas padrão da indústria, integradas cuidadosamente para funcionarem juntas:
 
 - **Framework**: Next.js 16 (App Router, React 19)
-- **Styling**: Tailwind CSS v4 + shadcn/ui + React Aria
-- **Database**: Supabase (PostgreSQL + Row-Level Security)
-- **Authentication**: Better Auth (Google OAuth) with Supabase JWT Bridge
-- **Payments**: Pre-configured Webhooks for **Stripe** and **Cakto**
-- **State Management**: Zustand (Client State) & React Query (Server State + Offline Persistence)
-- **Internationalization (i18n)**: `react-i18next` (English & Portuguese included)
-- **Analytics Bridge**: Unified tracking across PostHog, Microsoft Clarity, and GA4
-- **Testing**: Vitest + React Testing Library
-- **Documentation**: Mintlify (`/docs`)
+- **Estilização**: Tailwind CSS v4 + shadcn/ui + React Aria
+- **Banco de Dados**: Supabase (PostgreSQL + Row-Level Security)
+- **Autenticação**: Better Auth (Google OAuth) com ponte JWT para o Supabase
+- **Pagamentos**: Webhooks pré-configurados para **Stripe** e **Cakto**
+- **Gerenciamento de Estado**: Zustand (Client State) & React Query (Server State + Persistência Offline)
+- **Internacionalização (i18n)**: `react-i18next` (Inglês e Português nativos)
+- **Analytics Bridge**: Rastreamento unificado entre PostHog, Microsoft Clarity e GA4
+- **Testes**: Vitest + React Testing Library
+- **Documentação**: Mintlify (`/docs`)
 
 ---
 
-## 📂 Feature-Sliced Structure
+## 📂 Estrutura "Feature-Sliced"
 
-We enforce a strict separation of concerns to keep the codebase clean:
+Reforçamos uma separação estrita de responsabilidades para manter o código limpo:
 
-```
-├── app/                  # Next.js App Router (Pages, Layouts, API Routes)
-├── features/             # Isolated domains (e.g., landing-page, auth, dashboard)
-├── shared/               # Shared logic, UI components, hooks, and i18n
-├── supabase/             # Database migrations and configuration
-├── docs/                 # Mintlify Documentation
-└── test/                 # Test setup and utilities
+```text
+├── app/                  # Next.js App Router (Páginas, Layouts, API Routes)
+├── features/             # Domínios isolados (ex: landing-page, auth, dashboard)
+├── shared/               # Lógica compartilhada, componentes de UI, hooks e i18n
+├── supabase/             # Migrações e configurações do banco de dados
+├── docs/                 # Documentação no Mintlify
+└── test/                 # Configuração de testes globais
 ```
 
 ---
 
-## 🚀 Getting Started
+## 🚀 Começando
 
-### 1. Prerequisites
+### 1. Pré-requisitos
+- Node.js 18+ (Recomendado Node 20)
+- `pnpm` (gerenciador de pacotes padrão)
+- Projeto no Supabase & Projeto no Google Cloud (para OAuth)
 
-- Node.js 18+ (Node 20 recommended)
-- `pnpm` (default package manager)
-- Supabase Project & Google Cloud Project (for OAuth)
-
-### 2. Installation
-
-Clone the repository and install the dependencies:
-
+### 2. Instalação
+Clone o repositório e instale as dependências:
 ```bash
 pnpm install
 ```
 
-### 3. Environment Setup
-
-Copy the example environment file and fill in your keys:
-
+### 3. Variáveis de Ambiente
+Copie o arquivo de exemplo e preencha suas chaves:
 ```bash
 cp .env.example .env.local
 ```
+*(Você precisará das credenciais do Supabase, Better Auth, Gateway de Pagamento e provedores de Analytics).*
 
-_(You will need credentials from Supabase, Better Auth, your Payment Gateway, and Analytics providers)._
-
-### 4. Database Setup
-
-Run the initial SQL migration against your Supabase instance to create the necessary tables (`users`, `subscriptions`, etc.). You can find the SQL script at:
+### 4. Configuração do Banco de Dados
+Execute a migração SQL inicial no seu projeto Supabase para criar as tabelas necessárias (`users`, `subscriptions`, etc.). O script SQL está em:
 `supabase/migrations/0000_initial.sql`
 
-### 5. Run the Application
-
-Start the development server:
-
+### 5. Rodando a Aplicação
+Inicie o servidor de desenvolvimento:
 ```bash
 pnpm run dev
 ```
 
 ---
 
-## 💳 Payment Gateways
+## 💳 Gateways de Pagamento
 
-This boilerplate supports both **Stripe** and **Cakto**.
+Este boilerplate suporta nativamente o **Stripe** e a **Cakto**.
 
-1. Decide which gateway you will use for your SaaS.
-2. Go to `app/api/webhooks/` and **delete the folder** of the gateway you will _not_ use.
-3. Both gateways share the same database synchronization logic (`handle-event.ts`), so your subscription tiers will work flawlessly regardless of your choice.
+1. Decida qual gateway você irá utilizar no seu SaaS.
+2. Vá até `app/api/webhooks/` e **apague a pasta** do gateway que você *não* vai usar.
+3. Ambos os gateways compartilham a mesma lógica de sincronização com o banco de dados (`handle-event.ts`), garantindo que os níveis de assinatura funcionem perfeitamente independente da sua escolha.
 
 ---
 
-## 📖 Documentation
+## 📖 Documentação
 
-Full documentation is available via Mintlify. To run the documentation locally:
+A documentação completa está disponível via Mintlify. Para rodar a documentação localmente:
 
 ```bash
 pnpm run docs:dev
 ```
-
-_The docs server runs on port 3333 to avoid conflicting with Next.js._
+*O servidor de documentação roda na porta 3333 para não conflitar com o Next.js.*
 
 ---
 
-## ✅ Code Quality & Pre-commit Hooks
+## ✅ Qualidade de Código e Pre-commit Hooks
 
-We use **Husky** and **lint-staged** to ensure high code quality. Before every commit, the system automatically runs:
-
+Utilizamos **Husky** e **lint-staged** para garantir alta qualidade de código. Antes de cada commit, o sistema roda automaticamente:
 - `eslint --fix` & `prettier --write`
-- `tsc --noEmit` (Zero TypeScript errors allowed)
-- `vitest run` (All tests must pass)
+- `tsc --noEmit` (Zero erros de TypeScript permitidos)
+- `vitest run` (Todos os testes devem passar)
 
-You can run these checks manually at any time:
-
+Você pode rodar essas checagens manualmente a qualquer momento:
 ```bash
 pnpm run lint:fix
 pnpm run type-check
