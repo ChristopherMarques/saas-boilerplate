@@ -1,0 +1,48 @@
+---
+title: Getting Started
+description: "How to set up the boilerplate locally."
+---
+
+## Prerequisites
+
+- Node.js 18+ (Node 20 recommended)
+- `pnpm` (default package manager)
+- A Supabase project
+- A Google Cloud Console project (for OAuth)
+
+## Setup Instructions
+
+1. **Install dependencies:**
+   ```bash
+   pnpm install
+   ```
+
+2. **Environment Variables:**
+   Copy `.env.example` to `.env.local` and fill in your credentials.
+
+   ```bash
+   cp .env.example .env.local
+   ```
+
+3. **Database Migration:**
+   Run the initial migration against your Supabase instance to create the necessary tables.
+   You can copy the contents of `supabase/migrations/0000_initial.sql` into the Supabase SQL editor.
+
+4. **Run the Development Server:**
+   ```bash
+   pnpm run dev
+   ```
+
+## Development Workflow
+
+This boilerplate is configured with strict quality controls:
+- **Husky & Lint-Staged:** Runs Prettier and ESLint on all staged files before every commit.
+- **Type Checking:** Runs `tsc --noEmit` before commits to ensure zero type errors.
+- **Unit Tests:** Runs Vitest on staged files.
+
+You can run these manually using:
+```bash
+pnpm run lint:fix
+pnpm run type-check
+pnpm run test
+```

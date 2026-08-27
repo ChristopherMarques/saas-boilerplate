@@ -1,0 +1,24 @@
+---
+title: Authentication
+description: "Understanding the Better Auth + Supabase Bridge architecture."
+---
+
+We use **Better Auth** as the primary authentication provider and session manager, while still leveraging **Supabase** for the database and Row-Level Security (RLS).
+
+## The Flow
+
+1. **Login:** Users log in using Google OAuth via Better Auth (`shared/lib/auth.ts`).
+2. **Session Storage:** Better Auth manages the sessions in the PostgreSQL database (using a dedicated PgBouncer pool).
+3. **The Bridge:** To use Supabase RLS, the Next.js API route (`app/api/auth/supabase-token/route.ts`) acts as a bridge. It validates the Better Auth session cookie and signs a custom JWT using your `SUPABASE_JWT_SECRET`.
+4. **Client-side Injection:** The Supabase client (`shared/lib/supabase.ts`) intercepts `fetch` calls and injects this JWT as a Bearer token.
+
+## Why this approach?
+
+Supabase Auth is excellent, but Better Auth provides a more modern, flexible developer experience with plugins, seamless cookie caching, and native React support without the vendor lock-in. This bridge gives you the best of both worlds.
+
+## Configuration
+
+Ensure you have the following env vars set correctly:
+- `BETTER_AUTH_SECRET`: A random string for securing sessions.
+- `GOOGLE_CLIENT_ID` & `GOOGLE_CLIENT_SECRET`: From your Google Cloud console.
+- `SUPABASE_JWT_SECRET`: Essential for signing the bridge token.

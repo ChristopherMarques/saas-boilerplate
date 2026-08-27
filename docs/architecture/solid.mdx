@@ -1,0 +1,50 @@
+---
+title: SOLID Principles
+description: "How the SOLID architecture principles are applied in this boilerplate."
+---
+
+Building a scalable SaaS requires a strong architectural foundation. This boilerplate strictly adheres to the **SOLID principles** to ensure the codebase remains maintainable, testable, and easy to extend as the team grows.
+
+## 1. Single Responsibility Principle (SRP)
+
+> *A class or module should have one, and only one, reason to change.*
+
+We enforce SRP primarily through our **Feature-Sliced Architecture**:
+- **`features/`**: Each feature (e.g., `landing-page`, `auth`) is self-contained. The `landing-page` doesn't know how authentication works, and `auth` doesn't care about the landing page's UI.
+- **Micro-utilities**: Files like `shared/lib/utils/api-validation.ts` do exactly one thing: validate API parameters using Zod. They don't fetch data or handle HTTP responses.
+- **Components**: UI components (like those in `shared/components/ui/`) are "dumb" and purely presentational. They only receive props and render UI.
+
+## 2. Open/Closed Principle (OCP)
+
+> *Software entities should be open for extension, but closed for modification.*
+
+Our **Payment & Webhook Architecture** is the best example of OCP in this project:
+- The core logic for updating a user's subscription tier lives in `shared/lib/payments/handle-event.ts`.
+- It accepts a standard `SubscriptionEvent` interface.
+- If you want to add a new payment gateway (e.g., LemonSqueezy or Paddle), you **do not modify** the core `handle-event.ts`. Instead, you create a new webhook route (`app/api/webhooks/paddle`) that maps Paddle's payload to the `SubscriptionEvent` interface and passes it to the core handler.
+
+## 3. Liskov Substitution Principle (LSP)
+
+> *Subtypes must be substitutable for their base types.*
+
+In the context of React and Next.js, we apply LSP heavily in our Component Library (`shadcn/ui` + `React Aria`):
+- Every base UI component (like `Button`, `Input`, `Card`) extends its native HTML equivalent via `React.HTMLAttributes<HTMLElement>`.
+- If you replace a standard `<button>` with our `<Button>`, the application will not break. It accepts all standard attributes (`onClick`, `disabled`, `aria-label`) perfectly, ensuring seamless substitution.
+
+## 4. Interface Segregation Principle (ISP)
+
+> *Clients should not be forced to depend upon interfaces that they do not use.*
+
+We avoid "God objects" (massive data structures passed everywhere).
+- **Zod Schemas**: We define strict, segregated Zod schemas for specific API endpoints (e.g., in `api-validation.ts`).
+- **Props**: React components only receive the specific props they need. For example, the `PricingSection` doesn't receive the entire `User` object; it only receives the array of `plans`.
+- **Hooks**: Custom hooks like `useLocale()` or `useIsAdmin()` return only the specific methods and booleans required for their isolated task, rather than returning a massive context object.
+
+## 5. Dependency Inversion Principle (DIP)
+
+> *High-level modules should not depend on low-level modules. Both should depend on abstractions.*
+
+We isolate third-party dependencies so the core application doesn't tightly couple to them:
+- **Authentication**: The UI does not depend directly on the Better Auth implementation. It depends on our abstractions (`shared/lib/auth-client.ts` and `shared/lib/auth.ts`). If we ever migrate away from Better Auth, we only change the `lib` files; the React components remain untouched.
+- **Analytics Bridge**: `shared/lib/analytics.tsx` wraps PostHog, Microsoft Clarity, and GA4 behind a unified Context Provider. The rest of the app just calls generic events without knowing *which* analytics tool is receiving them.
+- **Database (Supabase)**: Data access is abstracted away from the UI components. We inject the Supabase client context rather than importing global instances directly into view layers.

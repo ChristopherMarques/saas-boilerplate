@@ -1,0 +1,35 @@
+---
+title: Internationalization (i18n)
+description: "How languages are managed in the boilerplate."
+---
+
+We use `i18next` with `react-i18next` for type-safe internationalization.
+
+The boilerplate supports **English** and **Portuguese (Brazil)** out of the box. English is the default and fallback language.
+
+## Directory Structure
+
+All i18n logic is located in `shared/i18n/`.
+- `index.ts`: Initializes the i18next instance, detects the browser language, and configures localStorage caching.
+- `use-locale.ts`: A custom hook to toggle languages and persist the selection.
+- `locales/en.ts`: The primary translation dictionary.
+- `locales/pt-BR.ts`: The Portuguese translation dictionary.
+
+## Adding a new language
+
+1. Create a new file in `shared/i18n/locales/` (e.g., `es.ts`).
+2. Mirror the exact structure of `en.ts`. TypeScript will enforce this if you type it correctly.
+3. Import the new dictionary in `shared/i18n/index.ts`.
+4. Add the language code to the `SUPPORTED_LANGUAGES` array.
+
+## Usage in Components
+
+```tsx
+"use client";
+import { useTranslation } from "react-i18next";
+
+export function MyComponent() {
+  const { t } = useTranslation();
+  return <h1>{t("landing.hero.title")}</h1>;
+}
+```

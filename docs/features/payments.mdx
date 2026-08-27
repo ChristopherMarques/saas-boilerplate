@@ -1,0 +1,27 @@
+---
+title: Payments & Subscriptions
+description: "Managing Stripe or Cakto webhooks."
+---
+
+The boilerplate comes pre-configured with **both Stripe and Cakto webhooks**. They are located in:
+- `app/api/webhooks/stripe`
+- `app/api/webhooks/cakto`
+
+## How to use
+
+1. Decide which payment gateway you want to use.
+2. **Delete the folder of the gateway you are NOT using.**
+3. Configure the webhook secret in your `.env.local` for the remaining gateway.
+
+## Unified Architecture
+
+Regardless of the gateway you choose, both webhooks map their payloads into a standard `SubscriptionEvent` and pass it to `handleSubscriptionUpdate` in `shared/lib/payments/handle-event.ts`.
+
+This function is responsible for:
+- Upserting the subscription in the Supabase database.
+- Upgrading or downgrading the user's `subscription_tier` on the `users` table based on the webhook status.
+- Ensuring idempotent updates (safe to retry if the webhook fails).
+
+## Modifying Plans
+
+Plans are centrally defined in `shared/lib/plans.ts`. When you create products in Stripe (or Cakto), ensure that the product metadata contains the exact `slug` defined in `plans.ts`. The webhook relies on this slug to determine the tier.

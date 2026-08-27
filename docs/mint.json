@@ -1,0 +1,42 @@
+{
+  "$schema": "https://mintlify.com/schema.json",
+  "name": "SaaS Boilerplate",
+  "logo": {
+    "dark": "/logo/dark.svg",
+    "light": "/logo/light.svg"
+  },
+  "colors": {
+    "primary": "#8B5CF6",
+    "light": "#A78BFA",
+    "dark": "#6D28D9"
+  },
+  "topbarLinks": [
+    {
+      "name": "Support",
+      "url": "mailto:hi@example.com"
+    }
+  ],
+  "topbarCtaButton": {
+    "name": "View Repo",
+    "url": "https://github.com/your-username/saas-boilerplate"
+  },
+  "navigation": [
+    {
+      "group": "Getting Started",
+      "pages": ["introduction", "getting-started"]
+    },
+    {
+      "group": "Features & Architecture",
+      "pages": [
+        "features/authentication",
+        "features/payments",
+        "architecture/i18n",
+        "architecture/solid"
+      ]
+    }
+  ],
+  "footerSocials": {
+    "twitter": "https://twitter.com/mintlify",
+    "github": "https://github.com/mintlify"
+  }
+}
