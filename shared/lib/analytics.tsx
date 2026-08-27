@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import posthog from "posthog-js";
 import { useAuthStore } from "@/features/auth";
 import { usePathname, useSearchParams } from "next/navigation";
+import Script from "next/script";
 
 // --- Google Analytics 4 ---
 const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
@@ -89,7 +90,9 @@ export function AnalyticsProvider() {
     <>
       {/* Microsoft Clarity Script */}
       {process.env.NEXT_PUBLIC_CLARITY_PROJECT_ID && (
-        <script
+        <Script
+          id="clarity-script"
+          strategy="afterInteractive"
           dangerouslySetInnerHTML={{
             __html: `
               (function(c,l,a,r,i,t,y){
@@ -105,8 +108,14 @@ export function AnalyticsProvider() {
       {/* Google Analytics 4 Script */}
       {GA_MEASUREMENT_ID && (
         <>
-          <script async src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`} />
-          <script
+          <Script
+            id="ga4-script-1"
+            strategy="afterInteractive"
+            src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
+          />
+          <Script
+            id="ga4-script-2"
+            strategy="afterInteractive"
             dangerouslySetInnerHTML={{
               __html: `
                 window.dataLayer = window.dataLayer || [];
