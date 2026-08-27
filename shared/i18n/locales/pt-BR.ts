@@ -100,6 +100,7 @@ export const ptBR = {
       upgrade: "Fazer upgrade",
       startFree: "Começar grátis",
       mostPopular: "Mais popular",
+      popular: "Mais popular",
       features: {
         projects: "{{count}} projeto",
         projects_plural: "{{count}} projetos",

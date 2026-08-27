@@ -1,6 +1,9 @@
 export { HeroSection } from "./components/hero-section";
 export { FeaturesSection } from "./components/features-section";
+export { ShowcaseSection } from "./components/showcase-section";
+export { RosterSection } from "./components/roster-section";
 export { PricingSection } from "./components/pricing-section";
 export { FaqSection } from "./components/faq-section";
 export { Footer } from "./components/footer";
 export { PublicNav } from "./components/public-nav";
+export { Global3DBackground } from "./components/global-3d-background";

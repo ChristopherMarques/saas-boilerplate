@@ -8,7 +8,7 @@ const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY!;
 const isServer = typeof window === "undefined";
 
 if (isServer && (!supabaseUrl || !supabaseServiceKey)) {
-  throw new Error("Missing Supabase environment variables for admin client");
+  console.warn("Missing Supabase environment variables for admin client");
 }
 
 declare global {

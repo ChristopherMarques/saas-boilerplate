@@ -99,6 +99,7 @@ export const en = {
       upgrade: "Upgrade",
       startFree: "Start for free",
       mostPopular: "Most popular",
+      popular: "Most popular",
       features: {
         projects: "{{count}} project",
         projects_plural: "{{count}} projects",

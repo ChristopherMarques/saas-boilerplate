@@ -2,85 +2,100 @@
 
 import { useTranslation } from "react-i18next";
 import Link from "next/link";
+import { GlassShape } from "@/shared/components/premium";
 
 export function Footer() {
   const { t } = useTranslation();
   const year = new Date().getFullYear();
 
   return (
-    <footer className="border-t border-border/50 bg-muted/30 px-6 py-12">
-      <div className="mx-auto max-w-6xl">
-        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+    <footer className="relative border-t border-[hsl(0,0%,20%)] bg-transparent px-6 py-20 overflow-hidden z-20">
+      <GlassShape shape="rectangle" size={200} top="-100px" left="40%" tint="red" opacity={0.06} rotate={5} parallaxSpeed={0.2} blur={24} />
+      <GlassShape shape="circle" size={150} bottom="10%" right="10%" tint="white" opacity={0.04} parallaxSpeed={-0.2} />
+      <div className="mx-auto max-w-7xl relative z-10 flex flex-col items-center">
+        <h2 className="text-[12vw] font-['Archivo_Black'] uppercase leading-none tracking-tighter text-[hsl(0,0%,20%)] select-none text-center mb-16">
+          {process.env.NEXT_PUBLIC_APP_NAME || "BOILERPLATE"}
+        </h2>
+
+        <div className="grid w-full gap-8 sm:grid-cols-2 lg:grid-cols-4 border-t border-[hsl(0,0%,15%)] pt-12">
           <div>
-            <h3 className="mb-3 text-lg font-bold text-foreground">
+            <h3 className="mb-4 font-['Archivo_Black'] text-xl uppercase tracking-tighter text-[hsl(0,100%,97.3%)]">
               {process.env.NEXT_PUBLIC_APP_NAME || "SaaS App"}
             </h3>
-            <p className="text-sm text-muted-foreground">{t("landing.footer.description")}</p>
+            <p className="text-sm text-[hsl(0,0%,55%)] leading-relaxed">
+              {t("landing.footer.description") || "O alicerce definitivo para aplicações web agressivas."}
+            </p>
           </div>
           <div>
-            <h4 className="mb-3 text-sm font-semibold text-foreground">
-              {t("landing.footer.product")}
+            <h4 className="mb-4 font-['JetBrains_Mono'] text-xs tracking-[0.2em] uppercase text-[hsl(351,97%,43.1%)]">
+              {t("landing.footer.product") || "Acesso"}
             </h4>
-            <ul className="space-y-2 text-sm text-muted-foreground">
+            <ul className="space-y-3 text-sm text-[hsl(0,0%,65%)] font-['Inter']">
               <li>
-                <Link href="#features" className="hover:text-foreground transition-colors">
-                  {t("nav.features")}
+                <Link href="#features" className="hover:text-[hsl(0,100%,97.3%)] transition-colors">
+                  {t("nav.features") || "Stack Técnica"}
                 </Link>
               </li>
               <li>
-                <Link href="#pricing" className="hover:text-foreground transition-colors">
-                  {t("nav.pricing")}
+                <Link href="#pricing" className="hover:text-[hsl(0,100%,97.3%)] transition-colors">
+                  {t("nav.pricing") || "Adquirir Código"}
                 </Link>
               </li>
               <li>
-                <Link href="#faq" className="hover:text-foreground transition-colors">
-                  {t("nav.faq")}
+                <Link href="#faq" className="hover:text-[hsl(0,100%,97.3%)] transition-colors">
+                  {t("nav.faq") || "Perguntas"}
                 </Link>
               </li>
             </ul>
           </div>
           <div>
-            <h4 className="mb-3 text-sm font-semibold text-foreground">
-              {t("landing.footer.company")}
+            <h4 className="mb-4 font-['JetBrains_Mono'] text-xs tracking-[0.2em] uppercase text-[hsl(351,97%,43.1%)]">
+              {t("landing.footer.company") || "Suporte"}
             </h4>
-            <ul className="space-y-2 text-sm text-muted-foreground">
+            <ul className="space-y-3 text-sm text-[hsl(0,0%,65%)] font-['Inter']">
               <li>
-                <Link href="/about" className="hover:text-foreground transition-colors">
-                  {t("landing.footer.about")}
+                <Link href="/docs" className="hover:text-[hsl(0,100%,97.3%)] transition-colors">
+                  Documentação
                 </Link>
               </li>
               <li>
-                <Link href="/blog" className="hover:text-foreground transition-colors">
-                  {t("landing.footer.blog")}
+                <Link href="/discord" className="hover:text-[hsl(0,100%,97.3%)] transition-colors">
+                  Comunidade VIP
                 </Link>
               </li>
               <li>
-                <Link href="/contact" className="hover:text-foreground transition-colors">
-                  {t("landing.footer.contact")}
+                <Link href="/contact" className="hover:text-[hsl(0,100%,97.3%)] transition-colors">
+                  {t("landing.footer.contact") || "Contato"}
                 </Link>
               </li>
             </ul>
           </div>
           <div>
-            <h4 className="mb-3 text-sm font-semibold text-foreground">
-              {t("landing.footer.legal")}
+            <h4 className="mb-4 font-['JetBrains_Mono'] text-xs tracking-[0.2em] uppercase text-[hsl(351,97%,43.1%)]">
+              {t("landing.footer.legal") || "Jurídico"}
             </h4>
-            <ul className="space-y-2 text-sm text-muted-foreground">
+            <ul className="space-y-3 text-sm text-[hsl(0,0%,65%)] font-['Inter']">
               <li>
-                <Link href="/terms" className="hover:text-foreground transition-colors">
-                  {t("landing.footer.terms")}
+                <Link href="/terms" className="hover:text-[hsl(0,100%,97.3%)] transition-colors">
+                  {t("landing.footer.terms") || "Licença de Uso"}
                 </Link>
               </li>
               <li>
-                <Link href="/privacy" className="hover:text-foreground transition-colors">
-                  {t("landing.footer.privacy")}
+                <Link href="/privacy" className="hover:text-[hsl(0,100%,97.3%)] transition-colors">
+                  {t("landing.footer.privacy") || "Privacidade"}
                 </Link>
               </li>
             </ul>
           </div>
         </div>
-        <div className="mt-10 border-t border-border/50 pt-6 text-center text-sm text-muted-foreground">
-          © {year} {process.env.NEXT_PUBLIC_APP_NAME || "SaaS App"}. {t("landing.footer.rights")}
+        <div className="mt-16 w-full border-t border-[hsl(0,0%,20%)] pt-8 flex flex-col md:flex-row items-center justify-between text-sm text-[hsl(0,0%,45%)] font-['Inter']">
+          <p>© {year} {process.env.NEXT_PUBLIC_APP_NAME || "SaaS App"}. {t("landing.footer.rights") || "Todos os direitos reservados."}</p>
+          <div className="mt-4 md:mt-0 flex items-center gap-4">
+            <div className="h-2 w-2 rounded-full bg-[hsl(351,97%,43.1%)] animate-pulse shadow-[0_0_8px_rgba(217,3,36,0.8)]"></div>
+            <span className="font-['JetBrains_Mono'] text-xs uppercase tracking-widest text-[hsl(351,97%,43.1%)]">
+              SISTEMA ONLINE
+            </span>
+          </div>
         </div>
       </div>
     </footer>
