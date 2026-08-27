@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import Link from "next/link";
+import Image from "next/image";
 import { Menu, X, Globe } from "lucide-react";
 import { cn } from "@/shared/lib/utils";
 import { useLocale } from "@/shared/i18n/use-locale";
@@ -18,8 +19,15 @@ export function PublicNav() {
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/80 backdrop-blur-xl">
       <nav className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
-        <Link href="/" className="text-xl font-bold text-foreground">
-          {process.env.NEXT_PUBLIC_APP_NAME || "SaaS"}
+        <Link href="/" className="flex items-center gap-2">
+          <Image
+            src="/logo.svg"
+            alt={process.env.NEXT_PUBLIC_APP_NAME || "Logo"}
+            width={32}
+            height={32}
+            className="h-8 w-auto"
+            priority
+          />
         </Link>
 
         {/* Desktop */}
