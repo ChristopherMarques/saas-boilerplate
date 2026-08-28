@@ -14,7 +14,7 @@ import {
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen flex-col bg-transparent">
+    <div className="flex min-h-screen flex-col bg-transparent overflow-x-hidden w-full max-w-[100vw]">
       <Global3DBackground />
 
       <PublicNav />

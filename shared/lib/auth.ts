@@ -52,13 +52,13 @@ export const auth = betterAuth({
     enabled: false,
   },
 
-  socialProviders: {
+  socialProviders: process.env.GOOGLE_CLIENT_ID && process.env.GOOGLE_CLIENT_SECRET ? {
     google: {
-      clientId: process.env.GOOGLE_CLIENT_ID!,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
+      clientId: process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
       scope: ["email", "profile"],
     },
-  },
+  } : undefined,
 
   session: {
     // 60 days — users who open the app sporadically shouldn't be logged out

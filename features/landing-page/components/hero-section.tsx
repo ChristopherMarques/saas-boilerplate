@@ -22,7 +22,7 @@ export function HeroSection() {
   }, []);
 
   return (
-    <section className="relative flex min-h-[90vh] items-center justify-center overflow-hidden px-6 pt-32 pb-20 z-20">
+    <section id="hero" className="relative flex min-h-[90vh] items-center justify-center overflow-hidden px-6 pt-32 pb-20 z-20">
       <LiquidParticleBackground particleSpacing={50} interactionRadius={120} />
       
       {/* Decorative glass shapes */}
@@ -49,7 +49,7 @@ export function HeroSection() {
 
         <h1 
           ref={titleRef}
-          className="relative z-10 mb-8 font-['Archivo_Black'] text-6xl leading-[0.9] tracking-tighter text-[hsl(0,100%,97.3%)] opacity-0 sm:text-8xl md:text-9xl uppercase pointer-events-auto"
+          className="relative z-10 mb-8 font-heading text-4xl leading-[0.9] tracking-tighter text-[hsl(0,100%,97.3%)] opacity-0 sm:text-6xl md:text-7xl lg:text-8xl 2xl:text-9xl uppercase pointer-events-auto"
           style={{ textShadow: "0 2px 30px rgba(0,0,0,0.8), 0 0 60px rgba(0,0,0,0.5)" }}
         >
           {t("landing.hero.title") || "O SEU PRÓXIMO"}{" "}
@@ -60,7 +60,7 @@ export function HeroSection() {
 
         <p
           ref={subtitleRef}
-          className="relative z-10 mx-auto mb-12 max-w-2xl text-xl leading-relaxed text-[hsl(0,0%,70%)] opacity-0 pointer-events-auto"
+          className="relative z-10 mx-auto mb-12 max-w-2xl text-base leading-relaxed text-[hsl(0,0%,70%)] opacity-0 pointer-events-auto sm:text-lg md:text-xl"
           style={{ textShadow: "0 1px 8px rgba(0,0,0,0.9)" }}
         >
           {t("landing.hero.subtitle") || "Esta landing page foi construída com os mesmos componentes que você está prestes a adquirir. Inicie com uma base brutalista, de alta performance, projetada para dominar."}
@@ -72,7 +72,7 @@ export function HeroSection() {
         >
           <Link
             href="/login"
-            className="group relative inline-flex items-center justify-center gap-3 overflow-hidden rounded-none bg-[hsl(351,97%,43.1%)] px-10 py-5 text-lg font-['Archivo_Black'] uppercase text-[hsl(0,100%,97.3%)] transition-transform hover:scale-105 shadow-[0_0_30px_rgba(217,3,36,0.5)]"
+            className="group relative inline-flex items-center justify-center gap-3 overflow-hidden rounded-none bg-[hsl(351,97%,43.1%)] px-6 py-4 sm:px-10 sm:py-5 text-base sm:text-lg font-heading uppercase text-[hsl(0,100%,97.3%)] transition-transform hover:scale-105 shadow-[0_0_30px_rgba(217,3,36,0.5)]"
           >
             <div className="absolute inset-0 bg-white/20 translate-y-full transition-transform duration-300 group-hover:translate-y-0" />
             <span className="relative z-10">{t("landing.hero.cta") || "INICIAR SISTEMA"}</span>
@@ -80,7 +80,7 @@ export function HeroSection() {
           </Link>
           <Link
             href="#features"
-            className="group inline-flex items-center justify-center gap-2 px-8 py-4 text-sm font-['JetBrains_Mono'] uppercase tracking-widest text-[hsl(0,0%,90%)] transition-colors hover:text-[hsl(0,100%,100%)] bg-[hsl(0,0%,15%,0.5)] backdrop-blur-md rounded-none border border-[hsl(0,0%,30%)]"
+            className="group inline-flex items-center justify-center gap-2 px-6 py-4 sm:px-8 sm:py-4 text-xs sm:text-sm font-mono uppercase tracking-widest text-[hsl(0,0%,90%)] transition-colors hover:text-[hsl(0,100%,100%)] bg-[hsl(0,0%,15%,0.5)] backdrop-blur-md rounded-none border border-[hsl(0,0%,30%)]"
           >
             {t("landing.hero.ctaSecondary") || "Explorar Protocolo"}
           </Link>

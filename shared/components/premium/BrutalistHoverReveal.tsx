@@ -106,7 +106,7 @@ export function BrutalistHoverReveal({
             onMouseEnter={() => handleMouseEnter(idx)}
             onMouseLeave={() => handleMouseLeave(idx)}
           >
-            <h2 className="font-['Archivo_Black'] text-6xl md:text-8xl tracking-tighter text-transparent bg-clip-text bg-gradient-to-b from-[hsl(0,100%,97.3%)] to-[hsl(0,0%,55%)] hover:from-[hsl(351,97%,43.1%)] hover:to-[hsl(351,97%,30%)] transition-all duration-300 ease-out select-none">
+            <h2 className="font-heading text-6xl md:text-8xl tracking-tighter text-transparent bg-clip-text bg-gradient-to-b from-[hsl(0,100%,97.3%)] to-[hsl(0,0%,55%)] hover:from-[hsl(351,97%,43.1%)] hover:to-[hsl(351,97%,30%)] transition-all duration-300 ease-out select-none">
               {item.text.toUpperCase()}
             </h2>
             <div className="absolute -bottom-2 left-0 w-0 h-1 bg-[hsl(351,97%,43.1%)] group-hover:w-full transition-all duration-500 ease-out"></div>

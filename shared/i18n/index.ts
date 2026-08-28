@@ -21,7 +21,7 @@ let initialized = false;
 
 /**
  * Initialize i18next once per application instance.
- * English is the default and fallback language.
+ * Portuguese is the default and fallback language.
  */
 export function initI18n(lng?: SupportedLanguage): typeof i18n {
   if (initialized) {
@@ -36,7 +36,7 @@ export function initI18n(lng?: SupportedLanguage): typeof i18n {
     .init({
       resources,
       lng,
-      fallbackLng: "en",
+      fallbackLng: "pt-BR",
       supportedLngs: SUPPORTED_LANGUAGES as unknown as string[],
       load: "currentOnly",
       interpolation: { escapeValue: false },

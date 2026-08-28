@@ -56,8 +56,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body className={`${archivoBlack.variable} ${jetbrainsMono.variable} font-sans antialiased`}>
+    <html lang="en" className={`${archivoBlack.variable} ${jetbrainsMono.variable}`} suppressHydrationWarning>
+      <body className="font-sans antialiased" suppressHydrationWarning>
         <Providers>{children}</Providers>
         
         {/* Microsoft Clarity Script */}

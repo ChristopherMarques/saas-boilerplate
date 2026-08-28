@@ -141,6 +141,10 @@ export const en = {
       contact: "Contact",
       rights: "All rights reserved.",
     },
+    showcase: {
+      title: "ENTER THE VOID",
+      subtitle: "Unlock your product's potential with components built to fuse speed with pure aesthetics.",
+    },
   },
 
   // ─── Auth ───────────────────────────────────────────────────────

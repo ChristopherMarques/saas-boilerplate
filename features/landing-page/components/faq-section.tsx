@@ -69,10 +69,10 @@ export function FaqSection() {
       <GlassShape shape="circle" size={120} bottom="20%" left="5%" tint="neutral" opacity={0.1} parallaxSpeed={-0.3} blur={16} />
       <div className="relative z-10 mx-auto max-w-3xl">
         <div ref={titleRef} className="mb-16 text-center">
-          <h2 className="mb-4 font-['Archivo_Black'] text-4xl md:text-5xl uppercase tracking-tighter text-[hsl(0,100%,97.3%)]">
+          <h2 className="mb-4 font-heading text-3xl md:text-4xl lg:text-5xl uppercase tracking-tighter text-[hsl(0,100%,97.3%)]">
             {t("landing.faq.title") || "PERGUNTAS FREQUENTES"}
           </h2>
-          <p className="text-lg text-[hsl(0,0%,55%)] font-['Inter']">
+          <p className="text-base md:text-lg text-[hsl(0,0%,55%)] font-sans">
             {t("landing.faq.subtitle") || "Tudo o que você precisa saber para começar."}
           </p>
         </div>
@@ -97,7 +97,7 @@ export function FaqSection() {
                   aria-expanded={isOpen}
                 >
                   <span className={cn(
-                    "pr-4 text-lg font-['Archivo_Black'] uppercase tracking-tight transition-colors",
+                    "pr-4 text-lg font-heading uppercase tracking-tight transition-colors",
                     isOpen ? "text-[hsl(0,100%,97.3%)]" : "text-[hsl(0,0%,80%)]"
                   )}>
                     {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
@@ -124,7 +124,7 @@ export function FaqSection() {
                     >
                       <div className="px-6 pb-6 pt-0">
                         <div className="h-px w-full bg-gradient-to-r from-[hsl(351,97%,43.1%,0.5)] to-transparent mb-6"></div>
-                        <p className="text-base leading-relaxed text-[hsl(0,0%,65%)] font-['Inter']">
+                        <p className="text-base leading-relaxed text-[hsl(0,0%,65%)] font-sans">
                           {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
                           {t(`landing.faq.items.${key.replace("q", "a")}` as any)}
                         </p>

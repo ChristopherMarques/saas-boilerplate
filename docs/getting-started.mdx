@@ -1,46 +1,46 @@
 ---
-title: Getting Started
-description: "How to set up the boilerplate locally."
+title: Instalação
+description: "Como configurar o boilerplate localmente."
 ---
 
-## Prerequisites
+## Pré-requisitos
 
-- Node.js 18+ (Node 20 recommended)
-- `pnpm` (default package manager)
-- A Supabase project
-- A Google Cloud Console project (for OAuth)
+- Node.js 18+ (Node 20 recomendado)
+- `pnpm` (gerenciador de pacotes padrão)
+- Um projeto Supabase
+- Um projeto no Google Cloud Console (para OAuth)
 
-## Setup Instructions
+## Instruções de Instalação
 
-1. **Install dependencies:**
+1. **Instalar dependências:**
    ```bash
    pnpm install
    ```
 
-2. **Environment Variables:**
-   Copy `.env.example` to `.env.local` and fill in your credentials.
+2. **Variáveis de Ambiente:**
+   Copie o `.env.example` para `.env.local` e preencha suas credenciais.
 
    ```bash
    cp .env.example .env.local
    ```
 
-3. **Database Migration:**
-   Run the initial migration against your Supabase instance to create the necessary tables.
-   You can copy the contents of `supabase/migrations/0000_initial.sql` into the Supabase SQL editor.
+3. **Migração do Banco de Dados:**
+   Execute a migração inicial contra a sua instância do Supabase para criar as tabelas necessárias.
+   Você pode copiar o conteúdo de `supabase/migrations/0000_initial.sql` diretamente para o editor SQL do Supabase.
 
-4. **Run the Development Server:**
+4. **Rodar o Servidor de Desenvolvimento:**
    ```bash
    pnpm run dev
    ```
 
-## Development Workflow
+## Fluxo de Desenvolvimento
 
-This boilerplate is configured with strict quality controls:
-- **Husky & Lint-Staged:** Runs Prettier and ESLint on all staged files before every commit.
-- **Type Checking:** Runs `tsc --noEmit` before commits to ensure zero type errors.
-- **Unit Tests:** Runs Vitest on staged files.
+Este boilerplate está configurado com controles rigorosos de qualidade:
+- **Husky & Lint-Staged:** Roda Prettier e ESLint em todos os arquivos em staged antes de cada commit.
+- **Type Checking:** Roda `tsc --noEmit` antes dos commits para garantir zero erros de tipagem.
+- **Testes Unitários:** Roda o Vitest nos arquivos em staged.
 
-You can run these manually using:
+Você pode rodá-los manualmente usando:
 ```bash
 pnpm run lint:fix
 pnpm run type-check

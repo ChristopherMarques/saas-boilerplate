@@ -63,7 +63,7 @@ export function FeaturesSection() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="relative bg-[hsl(0,0%,10.2%,0.85)] px-6 py-32 z-20" id="features">
+    <section ref={sectionRef} className="relative bg-[hsl(0,0%,10.2%,0.85)] px-6 py-32 z-20 overflow-hidden" id="features">
       <Prism3D />
       <GlassShape shape="circle" size={300} top="-80px" right="-100px" tint="red" opacity={0.08} parallaxSpeed={0.3} />
       <GlassShape shape="diamond" size={120} top="30%" left="-40px" tint="neutral" opacity={0.1} rotate={15} parallaxSpeed={-0.4} />
@@ -72,7 +72,7 @@ export function FeaturesSection() {
         <div className="mb-20 text-center">
           <h2 
             ref={titleRef}
-            className="font-['Archivo_Black'] text-5xl md:text-7xl uppercase tracking-tighter text-[hsl(0,100%,97.3%)] opacity-0"
+            className="font-heading text-4xl md:text-5xl lg:text-6xl xl:text-7xl uppercase tracking-tighter text-[hsl(0,100%,97.3%)] opacity-0"
           >
             {t("landing.features.title") || "MÓDULOS INTEGRADOS"}
           </h2>
@@ -96,10 +96,10 @@ export function FeaturesSection() {
                       <Icon className="h-8 w-8" />
                     </div>
                     <div className="mt-8">
-                      <h3 className="mb-3 font-['Archivo_Black'] text-2xl uppercase tracking-tight text-[hsl(0,100%,97.3%)]">
+                      <h3 className="mb-3 font-heading text-2xl uppercase tracking-tight text-[hsl(0,100%,97.3%)]">
                         {t(`landing.features.${key}.title`) || key.toUpperCase()}
                       </h3>
-                      <p className="font-['Inter'] text-sm leading-relaxed text-[hsl(0,0%,55%)]">
+                      <p className="font-sans text-sm leading-relaxed text-[hsl(0,0%,55%)]">
                         {t(`landing.features.${key}.description`) || "Uma implementação robusta criada para performance bruta e confiabilidade absoluta em ambientes de produção."}
                       </p>
                     </div>

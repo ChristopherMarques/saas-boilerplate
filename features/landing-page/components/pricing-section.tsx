@@ -77,10 +77,10 @@ export function PricingSection() {
       <GlassShape shape="diamond" size={100} top="40%" left="3%" tint="white" opacity={0.05} rotate={-20} parallaxSpeed={0.4} />
       <div className="relative z-10 mx-auto max-w-6xl">
         <div ref={titleRef} className="mb-16 text-center">
-          <h2 className="mb-4 font-['Archivo_Black'] text-4xl md:text-5xl uppercase tracking-tighter text-[hsl(0,100%,97.3%)]">
+          <h2 className="mb-4 font-heading text-3xl md:text-4xl lg:text-5xl uppercase tracking-tighter text-[hsl(0,100%,97.3%)]">
             {t("landing.pricing.title") || "ADQUIRA O BOILERPLATE"}
           </h2>
-          <p className="mx-auto mb-8 max-w-2xl text-lg text-[hsl(0,0%,55%)]">
+          <p className="mx-auto mb-8 max-w-2xl text-base md:text-lg text-[hsl(0,0%,55%)]">
             {t("landing.pricing.subtitle") || "Poupe 100 horas de setup. Acesso vitalício ao código-fonte, atualizações contínuas e documentação completa."}
           </p>
 
@@ -89,7 +89,7 @@ export function PricingSection() {
             <button
               onClick={() => setInterval("monthly")}
               className={cn(
-                "rounded-lg px-6 py-2 text-sm font-['JetBrains_Mono'] uppercase tracking-wider transition-all",
+                "rounded-lg px-6 py-2 text-sm font-mono uppercase tracking-wider transition-all",
                 interval === "monthly"
                   ? "bg-[hsl(351,97%,43.1%)] text-[hsl(0,100%,97.3%)] shadow-md shadow-black/50"
                   : "text-[hsl(0,0%,55%)] hover:text-[hsl(0,100%,97.3%)]",
@@ -100,7 +100,7 @@ export function PricingSection() {
             <button
               onClick={() => setInterval("annual")}
               className={cn(
-                "rounded-lg px-6 py-2 text-sm font-['JetBrains_Mono'] uppercase tracking-wider transition-all",
+                "rounded-lg px-6 py-2 text-sm font-mono uppercase tracking-wider transition-all",
                 interval === "annual"
                   ? "bg-[hsl(351,97%,43.1%)] text-[hsl(0,100%,97.3%)] shadow-md shadow-black/50"
                   : "text-[hsl(0,0%,55%)] hover:text-[hsl(0,100%,97.3%)]",
@@ -196,7 +196,7 @@ function PlanCard({
       magneticStrength={15}
       badge={
         highlighted ? (
-          <div className="rounded-full bg-[hsl(351,97%,43.1%)] px-3 py-1 text-[10px] font-['Archivo_Black'] uppercase tracking-widest text-[hsl(0,100%,97.3%)] shadow-[0_0_10px_rgba(217,3,36,0.5)]">
+          <div className="rounded-full bg-[hsl(351,97%,43.1%)] px-3 py-1 text-[10px] font-heading uppercase tracking-widest text-[hsl(0,100%,97.3%)] shadow-[0_0_10px_rgba(217,3,36,0.5)]">
             {t("landing.pricing.popular") || "Mais Popular"}
           </div>
         ) : undefined
@@ -211,12 +211,12 @@ function PlanCard({
 
         <div className="flex flex-col h-full relative z-10 p-8">
           <div className="mb-6">
-            <h3 className="mb-2 font-['Archivo_Black'] text-2xl uppercase tracking-tight text-[hsl(0,100%,97.3%)]">{name}</h3>
+            <h3 className="mb-2 font-heading text-2xl uppercase tracking-tight text-[hsl(0,100%,97.3%)]">{name}</h3>
             <div className="flex items-baseline gap-1">
-              <span className="font-['Archivo_Black'] text-5xl text-[hsl(0,100%,97.3%)]">{price}</span>
+              <span className="font-heading text-4xl md:text-5xl text-[hsl(0,100%,97.3%)]">{price}</span>
               <span className="text-[hsl(0,0%,55%)] font-medium">{priceLabel}</span>
             </div>
-            {billedNote && <p className="mt-2 text-sm text-[hsl(0,0%,40%)] font-['JetBrains_Mono']">{billedNote}</p>}
+            {billedNote && <p className="mt-2 text-sm text-[hsl(0,0%,40%)] font-mono">{billedNote}</p>}
           </div>
 
           <ul className="mb-8 flex-1 space-y-4">
@@ -232,7 +232,7 @@ function PlanCard({
             <Link
               href={ctaHref}
               className={cn(
-                "inline-flex w-full items-center justify-center rounded-none px-6 py-4 text-sm font-['Archivo_Black'] uppercase tracking-wider transition-all hover:scale-105",
+                "inline-flex w-full items-center justify-center rounded-none px-6 py-4 text-sm font-heading uppercase tracking-wider transition-all hover:scale-105",
                 highlighted
                   ? "bg-[hsl(351,97%,43.1%)] text-[hsl(0,100%,97.3%)] shadow-[0_0_20px_rgba(217,3,36,0.4)]"
                   : "border border-[hsl(0,0%,30%)] bg-transparent text-[hsl(0,100%,97.3%)] hover:border-[hsl(351,97%,43.1%)] hover:bg-[hsl(351,97%,43.1%,0.1)]",

@@ -61,10 +61,10 @@ export function InteractiveTechGrid({
         >
           <MagneticGlassCard magneticStrength={15} className="h-32">
             <div className="flex flex-col items-center justify-center h-full text-center">
-              <span className="font-['JetBrains_Mono'] text-xs uppercase tracking-widest text-[hsl(351,97%,43.1%)] mb-2">
+              <span className="font-mono text-xs uppercase tracking-widest text-[hsl(351,97%,43.1%)] mb-2">
                 {item.category}
               </span>
-              <span className="font-['Archivo_Black'] text-xl uppercase tracking-tight text-[hsl(0,100%,97.3%)]">
+              <span className="font-heading text-xl uppercase tracking-tight text-[hsl(0,100%,97.3%)]">
                 {item.name}
               </span>
             </div>

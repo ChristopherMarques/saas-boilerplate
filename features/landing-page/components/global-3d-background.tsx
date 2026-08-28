@@ -5,6 +5,16 @@ import { Canvas, useFrame } from "@react-three/fiber";
 import { Float, Sparkles } from "@react-three/drei";
 import * as THREE from "three";
 
+// Silence THREE.Clock deprecation warning caused by @react-three/fiber internals in dev
+if (typeof window !== "undefined" && process.env.NODE_ENV === "development") {
+  const origWarn = console.warn;
+  console.warn = (...args: unknown[]) => {
+    if (typeof args[0] === "string" && args[0].includes("THREE.Clock")) return;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    origWarn.apply(console, args as any);
+  };
+}
+
 function CameraController() {
   useFrame((state) => {
     const scrollY = window.scrollY;

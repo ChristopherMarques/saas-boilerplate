@@ -16,23 +16,38 @@ export function PublicNav() {
   const [isScrolled, setIsScrolled] = useState(false);
   const { locale, toggleLocale } = useLocale();
   const { user } = useAuthStore();
-
+  
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
+      const currentScrollY = window.scrollY || document.documentElement.scrollTop || document.body.scrollTop || 0;
+      setIsScrolled(currentScrollY > 50);
     };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+
+    // Use both window and capture-phase document listeners to guarantee we catch the scroll event
+    // regardless of which element is actually scrolling (in case of Locomotive, Lenis, or custom layout wrappers).
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    document.addEventListener("scroll", handleScroll, { capture: true, passive: true });
+    
+    // Initial check
+    handleScroll();
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      document.removeEventListener("scroll", handleScroll, { capture: true });
+    };
   }, []);
 
   return (
-    <div className="fixed top-0 left-0 right-0 z-50 flex justify-center px-4 transition-all duration-500">
+    <div className={cn(
+      "fixed top-0 left-0 right-0 z-50 flex justify-center px-4 transition-all duration-500",
+      isScrolled ? "py-4" : "py-0"
+    )}>
       <header 
         className={cn(
-          "transition-all duration-500 overflow-hidden",
+          "transition-all duration-500 overflow-hidden w-full",
           isScrolled 
-            ? "mt-4 w-full max-w-5xl rounded-full border border-[hsl(0,0%,20%)] bg-[hsl(0,0%,8%)]/90 backdrop-blur-xl shadow-2xl" 
-            : "mt-0 w-full border-b border-transparent bg-transparent"
+            ? "max-w-7xl rounded-full border border-[hsl(0,0%,20%)] bg-[hsl(0,0%,8%)]/90 backdrop-blur-xl shadow-2xl" 
+            : "max-w-full border-b border-transparent bg-transparent"
         )}
       >
         <nav className="mx-auto flex h-20 items-center justify-between px-6">
@@ -43,39 +58,40 @@ export function PublicNav() {
                 alt={process.env.NEXT_PUBLIC_APP_NAME || "Logo"}
                 width={40}
                 height={40}
-                className="h-10 w-auto filter drop-shadow-[0_0_15px_rgba(217,3,36,0.8)] brightness-150"
+                className="filter drop-shadow-[0_0_15px_rgba(217,3,36,0.8)] brightness-150"
+                style={{ width: 'auto', height: '40px' }}
                 priority
               />
             </div>
-            <span className="font-['Archivo_Black'] text-xl uppercase tracking-tighter text-[hsl(0,100%,97.3%)] hidden sm:block">
+            <span className="font-heading text-xl uppercase tracking-tighter text-[hsl(0,100%,97.3%)] hidden sm:block whitespace-nowrap">
               SAAS <span className="text-[hsl(351,97%,43.1%)]">BOILERPLATE</span>
             </span>
           </Link>
 
           {/* Desktop */}
-          <div className="hidden items-center gap-8 md:flex">
+          <div className="hidden items-center gap-4 lg:gap-8 md:flex">
             <Link
               href="#features"
-              className="text-sm font-['JetBrains_Mono'] uppercase tracking-widest text-[hsl(0,0%,60%)] hover:text-[hsl(0,100%,97.3%)] transition-colors"
+              className="text-sm font-mono uppercase tracking-widest text-[hsl(0,0%,60%)] hover:text-[hsl(0,100%,97.3%)] transition-colors whitespace-nowrap"
             >
               {t("nav.features")}
             </Link>
             <Link
               href="#pricing"
-              className="text-sm font-['JetBrains_Mono'] uppercase tracking-widest text-[hsl(0,0%,60%)] hover:text-[hsl(0,100%,97.3%)] transition-colors"
+              className="text-sm font-mono uppercase tracking-widest text-[hsl(0,0%,60%)] hover:text-[hsl(0,100%,97.3%)] transition-colors whitespace-nowrap"
             >
               {t("nav.pricing")}
             </Link>
             <Link
               href="#faq"
-              className="text-sm font-['JetBrains_Mono'] uppercase tracking-widest text-[hsl(0,0%,60%)] hover:text-[hsl(0,100%,97.3%)] transition-colors"
+              className="text-sm font-mono uppercase tracking-widest text-[hsl(0,0%,60%)] hover:text-[hsl(0,100%,97.3%)] transition-colors whitespace-nowrap"
             >
               {t("nav.faq")}
             </Link>
 
             <button
               onClick={toggleLocale}
-              className="inline-flex items-center gap-1.5 text-sm font-['JetBrains_Mono'] uppercase tracking-widest text-[hsl(0,0%,60%)] hover:text-[hsl(0,100%,97.3%)] transition-colors"
+              className="inline-flex items-center gap-1.5 text-sm font-mono uppercase tracking-widest text-[hsl(0,0%,60%)] hover:text-[hsl(0,100%,97.3%)] transition-colors whitespace-nowrap"
               aria-label={t("a11y.switchLanguage")}
             >
               <Globe className="h-4 w-4" />
@@ -84,7 +100,7 @@ export function PublicNav() {
 
             <Link
               href={user ? "/dashboard" : "/login"}
-              className="rounded-full bg-[hsl(351,97%,43.1%)] px-6 py-2.5 text-sm font-['Archivo_Black'] uppercase tracking-widest text-[hsl(0,100%,97.3%)] hover:scale-105 transition-transform shadow-[0_0_15px_rgba(217,3,36,0.3)]"
+              className="rounded-full bg-[hsl(351,97%,43.1%)] px-6 py-2.5 text-sm font-heading uppercase tracking-widest text-[hsl(0,100%,97.3%)] hover:scale-105 transition-transform shadow-[0_0_15px_rgba(217,3,36,0.3)] whitespace-nowrap"
             >
               {user ? t("nav.dashboard") : t("nav.login")}
             </Link>
@@ -111,27 +127,27 @@ export function PublicNav() {
             <Link
               href="#features"
               onClick={() => setOpen(false)}
-              className="text-sm font-['JetBrains_Mono'] uppercase tracking-widest text-[hsl(0,0%,70%)]"
+              className="text-sm font-mono uppercase tracking-widest text-[hsl(0,0%,70%)]"
             >
               {t("nav.features")}
             </Link>
             <Link
               href="#pricing"
               onClick={() => setOpen(false)}
-              className="text-sm font-['JetBrains_Mono'] uppercase tracking-widest text-[hsl(0,0%,70%)]"
+              className="text-sm font-mono uppercase tracking-widest text-[hsl(0,0%,70%)]"
             >
               {t("nav.pricing")}
             </Link>
             <Link
               href="#faq"
               onClick={() => setOpen(false)}
-              className="text-sm font-['JetBrains_Mono'] uppercase tracking-widest text-[hsl(0,0%,70%)]"
+              className="text-sm font-mono uppercase tracking-widest text-[hsl(0,0%,70%)]"
             >
               {t("nav.faq")}
             </Link>
             <button
               onClick={toggleLocale}
-              className="flex items-center gap-2 text-sm font-['JetBrains_Mono'] uppercase tracking-widest text-[hsl(0,0%,70%)]"
+              className="flex items-center gap-2 text-sm font-mono uppercase tracking-widest text-[hsl(0,0%,70%)]"
             >
               <Globe className="h-4 w-4" />
               {LANGUAGE_LABELS[locale]}
@@ -139,7 +155,7 @@ export function PublicNav() {
             <Link
               href={user ? "/dashboard" : "/login"}
               onClick={() => setOpen(false)}
-              className="mt-2 rounded-none bg-[hsl(351,97%,43.1%)] px-5 py-3 text-center text-sm font-['Archivo_Black'] uppercase tracking-widest text-[hsl(0,100%,97.3%)]"
+              className="mt-2 rounded-none bg-[hsl(351,97%,43.1%)] px-5 py-3 text-center text-sm font-heading uppercase tracking-widest text-[hsl(0,100%,97.3%)]"
             >
               {user ? t("nav.dashboard") : t("nav.login")}
             </Link>

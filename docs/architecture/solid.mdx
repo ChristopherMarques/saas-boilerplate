@@ -1,50 +1,50 @@
 ---
-title: SOLID Principles
-description: "How the SOLID architecture principles are applied in this boilerplate."
+title: Princípios SOLID
+description: "Como os princípios da arquitetura SOLID são aplicados neste boilerplate."
 ---
 
-Building a scalable SaaS requires a strong architectural foundation. This boilerplate strictly adheres to the **SOLID principles** to ensure the codebase remains maintainable, testable, and easy to extend as the team grows.
+Construir um SaaS escalável requer uma forte base arquitetural. Este boilerplate adere estritamente aos **princípios SOLID** para garantir que o código base permaneça manutenível, testável e fácil de estender à medida que a equipe cresce.
 
-## 1. Single Responsibility Principle (SRP)
+## 1. Princípio da Responsabilidade Única (SRP)
 
-> *A class or module should have one, and only one, reason to change.*
+> *Uma classe ou módulo deve ter um, e apenas um, motivo para mudar.*
 
-We enforce SRP primarily through our **Feature-Sliced Architecture**:
-- **`features/`**: Each feature (e.g., `landing-page`, `auth`) is self-contained. The `landing-page` doesn't know how authentication works, and `auth` doesn't care about the landing page's UI.
-- **Micro-utilities**: Files like `shared/lib/utils/api-validation.ts` do exactly one thing: validate API parameters using Zod. They don't fetch data or handle HTTP responses.
-- **Components**: UI components (like those in `shared/components/ui/`) are "dumb" and purely presentational. They only receive props and render UI.
+Nós aplicamos o SRP principalmente através da nossa **Arquitetura Orientada a Funcionalidades (Feature-Sliced)**:
+- **`features/`**: Cada funcionalidade (ex: `landing-page`, `auth`) é auto-contida. A `landing-page` não sabe como a autenticação funciona, e a `auth` não se importa com a interface gráfica (UI) da landing page.
+- **Micro-utilidades**: Arquivos como `shared/lib/utils/api-validation.ts` fazem exatamente uma coisa: validar parâmetros da API usando Zod. Eles não buscam dados ou lidam com respostas HTTP.
+- **Componentes**: Os componentes de UI (como os em `shared/components/ui/`) são "burros" e puramente de apresentação. Eles apenas recebem propriedades (props) e renderizam a interface.
 
-## 2. Open/Closed Principle (OCP)
+## 2. Princípio Aberto/Fechado (OCP)
 
-> *Software entities should be open for extension, but closed for modification.*
+> *As entidades de software devem estar abertas para extensão, mas fechadas para modificação.*
 
-Our **Payment & Webhook Architecture** is the best example of OCP in this project:
-- The core logic for updating a user's subscription tier lives in `shared/lib/payments/handle-event.ts`.
-- It accepts a standard `SubscriptionEvent` interface.
-- If you want to add a new payment gateway (e.g., LemonSqueezy or Paddle), you **do not modify** the core `handle-event.ts`. Instead, you create a new webhook route (`app/api/webhooks/paddle`) that maps Paddle's payload to the `SubscriptionEvent` interface and passes it to the core handler.
+Nossa **Arquitetura de Pagamentos e Webhooks** é o melhor exemplo de OCP neste projeto:
+- A lógica central para atualizar o nível de assinatura de um usuário vive em `shared/lib/payments/handle-event.ts`.
+- Ela aceita uma interface padrão `SubscriptionEvent`.
+- Se você deseja adicionar um novo gateway de pagamento (ex: LemonSqueezy ou Paddle), você **não modifica** o `handle-event.ts` principal. Em vez disso, você cria uma nova rota de webhook (`app/api/webhooks/paddle`) que mapeia o payload do Paddle para a interface `SubscriptionEvent` e o passa para o manipulador principal.
 
-## 3. Liskov Substitution Principle (LSP)
+## 3. Princípio da Substituição de Liskov (LSP)
 
-> *Subtypes must be substitutable for their base types.*
+> *Subtipos devem ser substituíveis por seus tipos base.*
 
-In the context of React and Next.js, we apply LSP heavily in our Component Library (`shadcn/ui` + `React Aria`):
-- Every base UI component (like `Button`, `Input`, `Card`) extends its native HTML equivalent via `React.HTMLAttributes<HTMLElement>`.
-- If you replace a standard `<button>` with our `<Button>`, the application will not break. It accepts all standard attributes (`onClick`, `disabled`, `aria-label`) perfectly, ensuring seamless substitution.
+No contexto do React e Next.js, nós aplicamos muito o LSP na nossa Biblioteca de Componentes (`shadcn/ui` + `React Aria`):
+- Todo componente base de UI (como `Button`, `Input`, `Card`) estende seu equivalente HTML nativo através do `React.HTMLAttributes<HTMLElement>`.
+- Se você substituir um `<button>` padrão pelo nosso `<Button>`, a aplicação não vai quebrar. Ele aceita todos os atributos padrões (`onClick`, `disabled`, `aria-label`) perfeitamente, garantindo substituição sem atritos.
 
-## 4. Interface Segregation Principle (ISP)
+## 4. Princípio da Segregação de Interface (ISP)
 
-> *Clients should not be forced to depend upon interfaces that they do not use.*
+> *Os clientes não devem ser forçados a depender de interfaces que eles não usam.*
 
-We avoid "God objects" (massive data structures passed everywhere).
-- **Zod Schemas**: We define strict, segregated Zod schemas for specific API endpoints (e.g., in `api-validation.ts`).
-- **Props**: React components only receive the specific props they need. For example, the `PricingSection` doesn't receive the entire `User` object; it only receives the array of `plans`.
-- **Hooks**: Custom hooks like `useLocale()` or `useIsAdmin()` return only the specific methods and booleans required for their isolated task, rather than returning a massive context object.
+Evitamos "Objetos Deus" (estruturas de dados gigantes passadas para todo lado).
+- **Zod Schemas**: Definimos esquemas Zod estritos e segregados para endpoints específicos de API (ex: em `api-validation.ts`).
+- **Props**: Os componentes React recebem apenas as propriedades específicas que precisam. Por exemplo, a `PricingSection` não recebe o objeto `User` inteiro; ela recebe apenas um array de planos `plans`.
+- **Hooks**: Hooks customizados como `useLocale()` ou `useIsAdmin()` retornam apenas os métodos e booleanos específicos necessários para a sua tarefa isolada, em vez de retornar um objeto de contexto massivo.
 
-## 5. Dependency Inversion Principle (DIP)
+## 5. Princípio da Inversão de Dependência (DIP)
 
-> *High-level modules should not depend on low-level modules. Both should depend on abstractions.*
+> *Módulos de alto nível não devem depender de módulos de baixo nível. Ambos devem depender de abstrações.*
 
-We isolate third-party dependencies so the core application doesn't tightly couple to them:
-- **Authentication**: The UI does not depend directly on the Better Auth implementation. It depends on our abstractions (`shared/lib/auth-client.ts` and `shared/lib/auth.ts`). If we ever migrate away from Better Auth, we only change the `lib` files; the React components remain untouched.
-- **Analytics Bridge**: `shared/lib/analytics.tsx` wraps PostHog, Microsoft Clarity, and GA4 behind a unified Context Provider. The rest of the app just calls generic events without knowing *which* analytics tool is receiving them.
-- **Database (Supabase)**: Data access is abstracted away from the UI components. We inject the Supabase client context rather than importing global instances directly into view layers.
+Nós isolamos as dependências de terceiros para que a aplicação central não fique fortemente acoplada a elas:
+- **Autenticação**: A UI não depende diretamente da implementação do Better Auth. Ela depende de nossas abstrações (`shared/lib/auth-client.ts` e `shared/lib/auth.ts`). Se em algum momento nós migrarmos de Better Auth para outro serviço, só mudamos os arquivos `lib`; os componentes React permanecem intocados.
+- **Ponte de Analytics**: `shared/lib/analytics.tsx` envelopa o PostHog, Microsoft Clarity, e GA4 por trás de um Provider Context unificado. O resto do aplicativo apenas dispara eventos genéricos sem saber *qual* ferramenta de métrica está os recebendo.
+- **Banco de Dados (Supabase)**: O acesso a dados é abstraído dos componentes de UI. Nós injetamos o contexto do cliente do Supabase ao invés de importar instâncias globais diretamente nas camadas de visualização.

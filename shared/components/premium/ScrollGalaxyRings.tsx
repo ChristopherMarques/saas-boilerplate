@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useRef, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -14,6 +15,7 @@ export function ScrollGalaxyRings({
 }: {
   className?: string;
 }) {
+  const { t } = useTranslation();
   const containerRef = useRef<HTMLDivElement>(null);
   const ring1Ref = useRef<SVGSVGElement>(null);
   const ring2Ref = useRef<SVGSVGElement>(null);
@@ -134,11 +136,11 @@ export function ScrollGalaxyRings({
              <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
            </svg>
         </div>
-        <h3 className="font-['Archivo_Black'] text-4xl md:text-5xl text-[hsl(0,100%,97.3%)] mb-4 tracking-tight">
-          ENTRE NO VAZIO
+        <h3 className="font-heading text-4xl md:text-5xl text-[hsl(0,100%,97.3%)] mb-4 tracking-tight">
+          {t("landing.showcase.title") || "ENTRE NO VAZIO"}
         </h3>
         <p className="text-[hsl(0,0%,55%)] max-w-md mx-auto text-lg">
-          Desbloqueie o potencial do seu produto com componentes criados para aliar velocidade à estética pura.
+          {t("landing.showcase.subtitle") || "Desbloqueie o potencial do seu produto com componentes criados para aliar velocidade à estética pura."}
         </p>
       </div>
     </div>

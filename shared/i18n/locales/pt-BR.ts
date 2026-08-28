@@ -142,6 +142,10 @@ export const ptBR = {
       contact: "Contato",
       rights: "Todos os direitos reservados.",
     },
+    showcase: {
+      title: "ENTRE NO VAZIO",
+      subtitle: "Desbloqueie o potencial do seu produto com componentes criados para aliar velocidade à estética pura.",
+    },
   },
 
   // ─── Auth ───────────────────────────────────────────────────────
